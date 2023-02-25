@@ -10,25 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nisum.pruebanisum.dto.UserRequest;
-import com.nisum.pruebanisum.dto.UserResponse;
+import com.nisum.pruebanisum.dto.ParameterRequest;
 import com.nisum.pruebanisum.exception.ErrorGeneralException;
-import com.nisum.pruebanisum.service.IUsersService;
+import com.nisum.pruebanisum.jpa.entity.ParameterEntity;
+import com.nisum.pruebanisum.service.IParameterService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("user")
-public class UsersController {
+@RequestMapping("parameter")
+public class ParameterController {
 
 	@Autowired
-	private IUsersService iUsersService;
+	private IParameterService iParameterService;
 
-	@Operation(summary = "Servicio que guarda un usuario con correo como llave única")
-	@PostMapping(path = "save")
-	public ResponseEntity<UserResponse> save(@Valid @RequestBody UserRequest request) throws ErrorGeneralException {
-		return new ResponseEntity<>(iUsersService.save(request), HttpStatus.OK);
+	@Operation(summary = "Servicio que guarda o actualiza la expresión regular para validar el email")
+	@PostMapping(path = "save-expresion-email")
+	public ResponseEntity<Boolean> save(@Valid @RequestBody ParameterRequest request)
+			throws ErrorGeneralException {
+		return new ResponseEntity<>(iParameterService.save(request), HttpStatus.OK);
 	}
+
 }

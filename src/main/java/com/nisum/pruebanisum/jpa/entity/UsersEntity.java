@@ -56,7 +56,7 @@ public class UsersEntity {
 	@NotNull
 	@Column(name = "LAST_LOGIN")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastlogin;
+	private Date lastLogin;
 
 	@NotNull
 	@Column(name = "TOKEN")

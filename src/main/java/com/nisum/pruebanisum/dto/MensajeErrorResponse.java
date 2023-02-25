@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MensajeOut implements Serializable {
+public class MensajeErrorResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String mensaje;
