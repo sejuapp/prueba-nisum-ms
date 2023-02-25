@@ -45,10 +45,15 @@ public class UsersService implements IUsersService {
         return saveData(userSave);
     }
 
+    /**
+     * Método encargado de mapear el dto a clase entity para continuar con su persistencia
+     *
+     * @param user UserRequest
+     * @return UsersEntity
+     */
     public UsersEntity mapeerEntity(UserRequest user) {
 
         Date sysdate = new Date();
-
 
         UsersEntity entidad = ObjectConverter.map(user, UsersEntity.class);
         UUID uuid = UUID.randomUUID();
@@ -66,6 +71,12 @@ public class UsersService implements IUsersService {
         return entidad;
     }
 
+    /**
+     * Método encargado de persistor la información de users y phone y devolver la información mapeada
+     *
+     * @param data UsersEntity
+     * @return UserResponse
+     */
     public UserResponse saveData(UsersEntity data) {
 
         usersRepository.save(data);
@@ -82,6 +93,13 @@ public class UsersService implements IUsersService {
 
     }
 
+    /**
+     * Método que procesa todas las validaciones necesarias para el email
+     *
+     * @param email email a validar
+     * @return true si es valido
+     * @throws ErrorGeneralException error generados al evaluar el email
+     */
     public boolean processEmailValidation(String email) throws ErrorGeneralException {
 
         boolean emailValid = emailValidationsUtilities.validEmail(email);
