@@ -6,7 +6,7 @@ import com.nisum.pruebanisum.jpa.entity.ParameterEntity;
 import com.nisum.pruebanisum.jpa.repository.ParameterRepository;
 import com.nisum.pruebanisum.jpa.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -14,9 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Servicio de utilidad para las validaciones del email
+ * Componente de utilidad para las validaciones del email
  */
-@Service
+@Component
 public class EmailValidationsUtilities {
 
     @Autowired

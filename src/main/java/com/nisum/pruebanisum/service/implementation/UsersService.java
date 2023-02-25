@@ -1,13 +1,5 @@
 package com.nisum.pruebanisum.service.implementation;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
-
-import com.nisum.pruebanisum.utilities.Constantes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.nisum.pruebanisum.dto.UserRequest;
 import com.nisum.pruebanisum.dto.UserResponse;
 import com.nisum.pruebanisum.exception.ErrorGeneralException;
@@ -15,83 +7,96 @@ import com.nisum.pruebanisum.jpa.entity.UsersEntity;
 import com.nisum.pruebanisum.jpa.repository.PhoneRepository;
 import com.nisum.pruebanisum.jpa.repository.UsersRepository;
 import com.nisum.pruebanisum.service.IUsersService;
+import com.nisum.pruebanisum.utilities.Constantes;
 import com.nisum.pruebanisum.utilities.EmailValidationsUtilities;
+import com.nisum.pruebanisum.utilities.JwtTokenUtilities;
 import com.nisum.pruebanisum.utilities.ObjectConverter;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
 
 @Slf4j
 @Service
 public class UsersService implements IUsersService {
 
-	@Autowired
-	private UsersRepository usersRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
-	@Autowired
-	private PhoneRepository phoneRepository;
+    @Autowired
+    private PhoneRepository phoneRepository;
 
-	@Autowired
-	private EmailValidationsUtilities emailValidationsUtilities;
+    @Autowired
+    private EmailValidationsUtilities emailValidationsUtilities;
 
-	@Override
-	public UserResponse save(UserRequest user) throws ErrorGeneralException {
-		log.info("UserService: save(UserRequest user)");
+    @Autowired
+    private JwtTokenUtilities jwtTokenUtilities;
 
-		UsersEntity userSave = mapeerEntity(user);
-		processEmailValidation(userSave.getEmail());
+    @Override
+    public UserResponse save(UserRequest user) throws ErrorGeneralException {
+        log.info("UserService: save(UserRequest user)");
 
-		return saveData(userSave);
-	}
+        UsersEntity userSave = mapeerEntity(user);
+        processEmailValidation(userSave.getEmail());
 
-	public UsersEntity mapeerEntity(UserRequest user) {
+        return saveData(userSave);
+    }
 
-		Date sysdate = new Date();
+    public UsersEntity mapeerEntity(UserRequest user) {
 
-		UsersEntity entidad = ObjectConverter.map(user, UsersEntity.class);
-		UUID uuid = UUID.randomUUID();
-		String uuidAsString = uuid.toString();
+        Date sysdate = new Date();
 
-		entidad.setId(uuidAsString);
-		entidad.setCreated(sysdate);
-		entidad.setLastLogin(sysdate);
-		entidad.setModified(sysdate);
-		entidad.setToken(uuidAsString);
-		entidad.setActive(true);
 
-		return entidad;
-	}
+        UsersEntity entidad = ObjectConverter.map(user, UsersEntity.class);
+        UUID uuid = UUID.randomUUID();
+        String uuidAsString = uuid.toString();
 
-	public UserResponse saveData(UsersEntity data) {
+        String token = jwtTokenUtilities.generateToken(entidad.getEmail());
 
-		usersRepository.save(data);
+        entidad.setId(uuidAsString);
+        entidad.setCreated(sysdate);
+        entidad.setLastLogin(sysdate);
+        entidad.setModified(sysdate);
+        entidad.setToken(token);
+        entidad.setActive(true);
 
-		if (Objects.nonNull(data.getPhones()) && !data.getPhones().isEmpty()) {
-			data.getPhones().forEach(item -> item.setIdUser(data.getId()));
+        return entidad;
+    }
 
-			phoneRepository.saveAll(data.getPhones());
-		}
+    public UserResponse saveData(UsersEntity data) {
 
-		UserResponse userResponse = ObjectConverter.map(data, UserResponse.class);
+        usersRepository.save(data);
 
-		return userResponse;
+        if (Objects.nonNull(data.getPhones()) && !data.getPhones().isEmpty()) {
+            data.getPhones().forEach(item -> item.setIdUser(data.getId()));
 
-	}
+            phoneRepository.saveAll(data.getPhones());
+        }
 
-	public boolean processEmailValidation(String email) throws ErrorGeneralException {
+        UserResponse userResponse = ObjectConverter.map(data, UserResponse.class);
 
-		boolean emailValid = emailValidationsUtilities.validEmail(email);
+        return userResponse;
 
-		if (!emailValid) {
-			throw new ErrorGeneralException(Constantes.MsgError.EMAIL_FORMATO);
-		}
+    }
 
-		boolean emailExist = emailValidationsUtilities.existsEmail(email);
+    public boolean processEmailValidation(String email) throws ErrorGeneralException {
 
-		if (emailExist) {
-			throw new ErrorGeneralException(Constantes.MsgError.EMAIL_REGISTRADO);
-		}
+        boolean emailValid = emailValidationsUtilities.validEmail(email);
 
-		return true;
-	}
+        if (!emailValid) {
+            throw new ErrorGeneralException(Constantes.MsgError.EMAIL_FORMATO);
+        }
+
+        boolean emailExist = emailValidationsUtilities.existsEmail(email);
+
+        if (emailExist) {
+            throw new ErrorGeneralException(Constantes.MsgError.EMAIL_REGISTRADO);
+        }
+
+        return true;
+    }
 
 }

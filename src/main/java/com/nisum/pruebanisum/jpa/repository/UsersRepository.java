@@ -19,10 +19,10 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
 	 * Consulta que obtiene la cantidad de correos que existen
 	 *
 	 * @param email email a buscar
-	 * @return 1 si existe 0 si no existe
+	 * @return > a 1 si existe 0 si no existe
 	 */
 	@Query(value = """
-			SELECT COUNT(u) FROM UsersEntity u WHERE u.email = :email AND limit=1
+			SELECT COUNT(u) FROM UsersEntity u WHERE u.email = :email
 			""")
 	Integer countByEmail(@Param("email") String email);
 }
