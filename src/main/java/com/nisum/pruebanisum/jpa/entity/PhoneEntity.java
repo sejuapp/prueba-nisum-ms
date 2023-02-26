@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -24,16 +26,16 @@ public class PhoneEntity {
 	@Column(name = "PHONE_ID")
 	private Long id;
 
-	@Column(name = "NUMBER")
+	@Column(name = "PHONE_NUMBER", nullable = false)
 	private String number;
 
-	@Column(name = "CITY_CODE")
-	private String citycode;
+	@Column(name = "PHONE_CITY_CODE", nullable = false)
+	private String cityCode;
 
-	@Column(name = "CONTRY_CODE")
-	private String contrycode;
+	@Column(name = "PHONE_COUNTRY_CODE", nullable = false)
+	private String countryCode;
 
-	@Column(name = "USERS_USER_ID")
+	@Column(name = "USERS_USER_ID", nullable = false)
 	private String idUser;
 
 	@JoinColumn(name = "USERS_USER_ID", referencedColumnName = "USER_ID", updatable = false, insertable = false)

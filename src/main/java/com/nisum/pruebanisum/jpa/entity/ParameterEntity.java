@@ -22,7 +22,6 @@ public class ParameterEntity {
 	@Column(name = "PARAMETER_ID")
 	private Long id;
 
-	@NotNull
 	@Column(name = "PARAMETER_NAME", unique = true)
 	private String name;
 

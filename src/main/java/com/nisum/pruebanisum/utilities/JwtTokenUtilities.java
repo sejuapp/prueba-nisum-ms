@@ -35,7 +35,7 @@ public class JwtTokenUtilities {
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
-    public String getValueFromToken(String token) {
+    private String getValueFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 

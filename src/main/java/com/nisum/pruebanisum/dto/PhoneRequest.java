@@ -1,5 +1,6 @@
 package com.nisum.pruebanisum.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,10 @@ import lombok.Setter;
 @Setter
 public class PhoneRequest {
 	private String number;
-	private String citycode;
-	private String contrycode;
+
+	@JsonProperty(value = "citycode")
+	private String cityCode;
+
+	@JsonProperty(value = "contrycode")
+	private String countryCode;
 }

@@ -33,14 +33,14 @@ public class ErrorController {
 	public ResponseEntity<MensajeErrorResponse> handleExceptionInternalServer(Exception ex) {
 		log.error("INTERNAL_SERVER_ERROR: {} : {}" + ex.getLocalizedMessage(), ex);
 		MensajeErrorResponse mensaje = new MensajeErrorResponse();
-		mensaje.setMensaje("Ha ocurrido un error en el sistema");
+		mensaje.setMensaje("Ha ocurrido un error en el sistema: " + ex.getMessage());
 		return new ResponseEntity<MensajeErrorResponse>(mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public ResponseEntity<MensajeErrorResponse> handleExceptionNotFound(ErrorGeneralException ex) {
+	public ResponseEntity<MensajeErrorResponse> handleExceptionErrorGeneral(ErrorGeneralException ex) {
 		log.error("ERROR_GENERAL: {} : {}" + ex.getLocalizedMessage(), ex);
 
 		MensajeErrorResponse mensaje = new MensajeErrorResponse();

@@ -2,19 +2,14 @@ package com.nisum.pruebanisum.jpa.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 /**
  * 
@@ -28,44 +23,40 @@ import lombok.Setter;
 public class UsersEntity {
 
 	@Id
-	@Column(name = "USER_ID")
-	@NotNull
+	@Column(name = "USER_ID", nullable = false)
 	private String id;
 
-	@NotNull
-	@Column(name = "NAME")
+	@Column(name = "USER_NAME", nullable = false)
 	private String name;
 
-	@NotNull
-	@Column(name = "EMAIL", unique=true)
+	@Column(name = "USER_EMAIL", unique=true, nullable = false)
 	private String email;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "USER_PASSWORD", nullable = false)
 	private String password;
 
-	@NotNull
-	@Column(name = "CREATED")
+	@Column(name = "USER_CREATED", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 
-	@NotNull
-	@Column(name = "MODIFIED")
+	@Column(name = "USER_MODIFIED", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
 
-	@NotNull
-	@Column(name = "LAST_LOGIN")
+	@Column(name = "USER_LAST_LOGIN", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogin;
 
-	@NotNull
-	@Column(name = "TOKEN")
+	@Column(name = "USER_TOKEN", nullable = false)
 	private String token;
 
-	@NotNull
-	@Column(name = "ACTIVE")
+	@Column(name = "USER_ACTIVE", nullable = false)
 	private Boolean active;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<PhoneEntity> phones;
+
+	public UsersEntity() {
+		this.id = UUID.randomUUID().toString();
+	}
 }

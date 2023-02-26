@@ -14,10 +14,11 @@ import com.nisum.pruebanisum.utilities.ObjectConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -25,16 +26,14 @@ public class UsersService implements IUsersService {
 
     @Autowired
     private UsersRepository usersRepository;
-
     @Autowired
     private PhoneRepository phoneRepository;
-
     @Autowired
     private EmailValidationsUtilities emailValidationsUtilities;
-
     @Autowired
     private JwtTokenUtilities jwtTokenUtilities;
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
     public UserResponse save(UserRequest user) throws ErrorGeneralException {
         log.info("UserService: save(UserRequest user)");
@@ -56,12 +55,9 @@ public class UsersService implements IUsersService {
         Date sysdate = new Date();
 
         UsersEntity entidad = ObjectConverter.map(user, UsersEntity.class);
-        UUID uuid = UUID.randomUUID();
-        String uuidAsString = uuid.toString();
 
         String token = jwtTokenUtilities.generateToken(entidad.getEmail());
 
-        entidad.setId(uuidAsString);
         entidad.setCreated(sysdate);
         entidad.setLastLogin(sysdate);
         entidad.setModified(sysdate);
