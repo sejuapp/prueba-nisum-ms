@@ -24,8 +24,8 @@ App prueba técnica Nisum
 <p>Ingrese a la app, e inicie a probar el servicio a través de:</p>
 
    <ul>
-     <li><a href="https://site--back--8kyzyfq4vw5r.code.run/nisum/swagger-ui/index.html">online-app-swagger-ui</a></li>
-     <li><a href="https://site--back--8kyzyfq4vw5r.code.run/nisum/db/">online-db-h2</a></li>
+     <li><a target="_blank" href="https://site--back--8kyzyfq4vw5r.code.run/nisum/swagger-ui/index.html">online-app-swagger-ui</a></li>
+     <li><a target="_blank" href="https://site--back--8kyzyfq4vw5r.code.run/nisum/db/">online-db-h2</a></li>
    </ul>
 
 ### Local
@@ -46,8 +46,8 @@ App prueba técnica Nisum
 4. Corra el proyecto e ingrese a 
  
    <ul>
-     <li><a href="http://localhost:8081/nisum/swagger-ui/index.html#">local-app-swagger-ui</a></li>
-     <li><a href="http://localhost:8081/nisum/db/">local-db-h2</a></li>
+     <li><a target="_blank" href="http://localhost:8081/nisum/swagger-ui/index.html#">local-app-swagger-ui</a></li>
+     <li><a target="_blank" href="http://localhost:8081/nisum/db/">local-db-h2</a></li>
    </ul>
 
 
