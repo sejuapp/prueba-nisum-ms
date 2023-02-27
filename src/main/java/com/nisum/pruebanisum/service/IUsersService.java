@@ -13,8 +13,17 @@ import java.util.List;
  */
 public interface IUsersService {
 
+    /**
+     * Método que consulta todos los usuarios
+     * @return List<UserResponse>
+     */
     List<UserResponse> getAll();
 
+    /**
+     *  Método que consulta un usuario por id
+     * @param id id del usuario
+     * @return UserResponse
+     */
     UserResponse getById(String id);
 
     /**
@@ -26,8 +35,21 @@ public interface IUsersService {
      */
     UserSaveResponse save(UserRequest user) throws ErrorGeneralException;
 
+    /**
+     * Método que actualiza el usuario por id
+     * @param id id del usuario
+     * @param user UserUpdateRequest
+     * @return UserSaveResponse
+     * @throws ErrorGeneralException errores generados en el proceso
+     */
     UserSaveResponse update(String id, UserUpdateRequest user) throws ErrorGeneralException;
 
+    /**
+     * Método que elimina el usuario por id
+     * @param id id del usuario
+     * @return UserSaveResponse
+     * @throws ErrorGeneralException  errores generados en el proceso
+     */
     UserSaveResponse delete(String id) throws ErrorGeneralException;
 
 }
