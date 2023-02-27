@@ -18,6 +18,7 @@ public final class Constantes {
         private MsgError() {
         }
 
+        public static final String NOT_EMPTY = "Campo obligatorio";
         public static final String EMAIL_FORMATO = "Correo no cumple con el formato correcto";
         public static final String EMAIL_REGISTRADO = "El correo ya registrado";
         public static final String EMAIL_OBLIGATORIO = "El correo es obligatorio";

@@ -1,8 +1,11 @@
 package com.nisum.pruebanisum.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nisum.pruebanisum.utilities.Constantes;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Dto del request telefono
@@ -10,11 +13,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PhoneRequest {
-	private String number;
 
-	@JsonProperty(value = "citycode")
-	private String cityCode;
+    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
+    private String number;
 
-	@JsonProperty(value = "contrycode")
-	private String countryCode;
+    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
+    @JsonProperty(value = "citycode")
+    private String cityCode;
+
+    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
+    @JsonProperty(value = "contrycode")
+    private String countryCode;
 }
