@@ -1,15 +1,18 @@
 package com.nisum.pruebanisum.service.implementation;
 
 import com.nisum.pruebanisum.dto.ParameterRequest;
+import com.nisum.pruebanisum.dto.ParameterResponse;
 import com.nisum.pruebanisum.enumerator.ParameterEnum;
 import com.nisum.pruebanisum.exception.ErrorGeneralException;
 import com.nisum.pruebanisum.jpa.entity.ParameterEntity;
 import com.nisum.pruebanisum.jpa.repository.ParameterRepository;
 import com.nisum.pruebanisum.service.IParameterService;
 import com.nisum.pruebanisum.utilities.Constantes;
+import com.nisum.pruebanisum.utilities.ObjectConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -24,11 +27,12 @@ public class ParameterService implements IParameterService {
     @Autowired
     private ParameterRepository parameterRepository;
 
+
     @Override
     public boolean save(ParameterRequest request) throws ErrorGeneralException {
 
         String expresion = validData(request.getExpresion());
-        Optional<ParameterEntity> optParametro = parameterRepository.findByName(ParameterEnum.EMAIL.toString());
+        Optional<ParameterEntity> optParametro = parameterRepository.findByName(ParameterEnum.PASSWORD.toString());
 
         ParameterEntity nParametro;
         if (optParametro.isEmpty()) {
@@ -43,6 +47,11 @@ public class ParameterService implements IParameterService {
         parameterRepository.save(nParametro);
 
         return true;
+    }
+
+    @Override
+    public List<ParameterResponse> getAll() {
+        return ObjectConverter.mapAll(parameterRepository.findAll(), ParameterResponse.class);
     }
 
     /**

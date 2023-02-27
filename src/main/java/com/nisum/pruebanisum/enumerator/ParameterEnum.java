@@ -6,5 +6,5 @@ package com.nisum.pruebanisum.enumerator;
  *
  */
 public enum ParameterEnum {
-	EMAIL
+	EMAIL, PASSWORD;
 }

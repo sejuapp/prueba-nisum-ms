@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Dto del request telefono
+ * Dto del request user
  */
 @Getter
 @Setter
-public class PhoneRequest extends ModelPhoneDto {
+public class UserUpdateRequest extends ModelUsersDto {
+
+
 }

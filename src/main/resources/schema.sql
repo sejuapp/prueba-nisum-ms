@@ -1,5 +1,5 @@
 ------- INICIO creación la tabla users
-CREATE TABLE users (
+CREATE TABLE appusers (
 	user_id uuid NOT NULL,
 	user_name varchar NOT NULL,
 	user_email varchar NOT NULL,
@@ -12,21 +12,21 @@ CREATE TABLE users (
 );
 
 --Creamos la llave primaria para tabla users
-ALTER TABLE	users ADD CONSTRAINT users_pk PRIMARY KEY (user_id);
+ALTER TABLE	appusers ADD CONSTRAINT users_pk PRIMARY KEY (user_id);
 
 --Creamos la llave única para tabla users
-ALTER TABLE	users ADD CONSTRAINT users_email UNIQUE (user_email);
+ALTER TABLE	appusers ADD CONSTRAINT users_email UNIQUE (user_email);
 
 --Agregamos comentarios
-COMMENT ON COLUMN users.user_id IS 'Identificador único de la tabla generado UUID';
-COMMENT ON COLUMN users.user_name IS 'Nombre del usuario';
-COMMENT ON COLUMN users.user_email IS 'Email del usuario, debe ser único';
-COMMENT ON COLUMN users.user_password IS 'Contraseña del usuario';
-COMMENT ON COLUMN users.user_created IS 'Fecha de creación del usuario';
-COMMENT ON COLUMN users.user_modified IS 'Fecha de modificación';
-COMMENT ON COLUMN users.user_last_login IS 'Fecha del ultimo login';
-COMMENT ON COLUMN users.user_token IS 'Token del usuario JWT';
-COMMENT ON COLUMN users.user_active IS 'Indica si el usuario esta activo en el sistema';
+COMMENT ON COLUMN appusers.user_id IS 'Identificador único de la tabla generado UUID';
+COMMENT ON COLUMN appusers.user_name IS 'Nombre del usuario';
+COMMENT ON COLUMN appusers.user_email IS 'Email del usuario, debe ser único';
+COMMENT ON COLUMN appusers.user_password IS 'Contraseña del usuario';
+COMMENT ON COLUMN appusers.user_created IS 'Fecha de creación del usuario';
+COMMENT ON COLUMN appusers.user_modified IS 'Fecha de modificación';
+COMMENT ON COLUMN appusers.user_last_login IS 'Fecha del ultimo login';
+COMMENT ON COLUMN appusers.user_token IS 'Token del usuario JWT';
+COMMENT ON COLUMN appusers.user_active IS 'Indica si el usuario esta activo en el sistema';
 
 ------- FIN creación la tabla users
 
@@ -37,14 +37,15 @@ CREATE TABLE phone (
 	phone_number varchar NOT NULL,
 	phone_city_code varchar NOT NULL,
 	phone_country_code varchar NOT NULL,
-	users_user_id varchar NOT NULL
+	phone_active boolean NOT NULL,
+	users_user_id uuid NOT NULL
 );
 
 --Creamos la llave primaria para tabla phone
 ALTER TABLE	phone ADD CONSTRAINT phone_pk PRIMARY KEY (phone_id);
 
 --Creamos la llave foraneas para tabla phone
-ALTER TABLE	phone ADD CONSTRAINT phone_fk FOREIGN KEY (users_user_id) REFERENCES users(user_id);
+ALTER TABLE	phone ADD CONSTRAINT fk_user FOREIGN KEY (users_user_id) REFERENCES appusers(user_id);
 
 --Agregamos comentarios tabla phone
 COMMENT ON COLUMN phone.phone_id IS 'Identificador único de la tabla';

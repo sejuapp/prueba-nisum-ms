@@ -11,7 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class ParameterControllerTest {
@@ -31,6 +34,14 @@ class ParameterControllerTest {
         Mockito.when(iParameterService.save(request)).thenReturn(true);
 
         var respuesta = controller.save(request);
-        Assertions.assertEquals(ResponseEntity.ok(true), respuesta);
+        Assertions.assertEquals(HttpStatus.CREATED, respuesta.getStatusCode());
+    }
+
+    @DisplayName("getAllTestOk:> flujo correcto del controlador")
+    @Test
+    void getAllTestOk() throws ErrorGeneralException {
+        Mockito.when(iParameterService.getAll()).thenReturn(List.of());
+        var respuesta = controller.getAll();
+        Assertions.assertEquals(HttpStatus.OK, respuesta.getStatusCode());
     }
 }

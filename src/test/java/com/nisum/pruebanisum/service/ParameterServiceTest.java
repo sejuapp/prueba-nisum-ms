@@ -34,7 +34,7 @@ class ParameterServiceTest {
         ParameterRequest  rParam = new ParameterRequest();
         rParam.setExpresion(EXPRESION_VALIDA);
 
-        Mockito.when(parameterRepository.findByName(ParameterEnum.EMAIL.toString())).thenReturn(Optional.empty());
+        Mockito.when(parameterRepository.findByName(ParameterEnum.PASSWORD.toString())).thenReturn(Optional.empty());
         boolean respuesta = service.save(rParam);
 
         Assertions.assertTrue(respuesta);
@@ -49,7 +49,7 @@ class ParameterServiceTest {
 
         ParameterEntity nParametro = new ParameterEntity();
 
-        Mockito.when(parameterRepository.findByName(ParameterEnum.EMAIL.toString())).thenReturn(Optional.of(nParametro));
+        Mockito.when(parameterRepository.findByName(ParameterEnum.PASSWORD.toString())).thenReturn(Optional.of(nParametro));
         boolean respuesta = service.save(rParam);
 
         Assertions.assertTrue(respuesta);
@@ -86,5 +86,11 @@ class ParameterServiceTest {
 
         Assertions.assertNotNull(ex.getMessage());
         Assertions.assertEquals(Constantes.MsgError.EXPRESION_INVALIDA, ex.getMessage());
+    }
+
+    @Test
+    void getAllTest() {
+        service.getAll();
+        Mockito.verify(parameterRepository).findAll();
     }
 }

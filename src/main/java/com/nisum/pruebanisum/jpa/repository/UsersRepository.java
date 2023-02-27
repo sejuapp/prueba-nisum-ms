@@ -1,28 +1,28 @@
 package com.nisum.pruebanisum.jpa.repository;
 
+import com.nisum.pruebanisum.jpa.entity.UsersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.nisum.pruebanisum.jpa.entity.UsersEntity;
-
-import feign.Param;
+import java.util.Optional;
 
 /**
  * Repositorio que contiene todas las operaciones necesarias para gestionar la información de la
  * entidad UsersEntity
  */
 @Repository
-public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
+public interface UsersRepository extends JpaRepository<UsersEntity, String> {
 
-	/**
-	 * Consulta que obtiene la cantidad de correos que existen
-	 *
-	 * @param email email a buscar
-	 * @return > a 1 si existe 0 si no existe
-	 */
-	@Query(value = """
-			SELECT COUNT(u) FROM UsersEntity u WHERE u.email = :email
-			""")
-	Integer countByEmail(@Param("email") String email);
+    /**
+     * Consulta que obtiene es usuario por el email
+     *
+     * @param email email a buscar
+     * @return Optional<UsersEntity>
+     */
+    @Query(value = """
+            SELECT u FROM UsersEntity u WHERE u.email = :pEmail
+            """)
+    Optional<UsersEntity> getByEmail(@Param("pEmail") String email);
 }

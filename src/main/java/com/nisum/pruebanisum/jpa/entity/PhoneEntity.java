@@ -25,6 +25,9 @@ public class PhoneEntity {
     @Column(name = "PHONE_COUNTRY_CODE", nullable = false)
     private String countryCode;
 
+    @Column(name = "PHONE_ACTIVE", nullable = false)
+    private Boolean active;
+
     @Column(name = "USERS_USER_ID", nullable = false)
     private String idUser;
 

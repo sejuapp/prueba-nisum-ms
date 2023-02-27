@@ -1,11 +1,9 @@
 package com.nisum.pruebanisum.dto;
 
-import com.nisum.pruebanisum.utilities.Constantes;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -13,16 +11,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class UserRequest {
-
-    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
-    private String name;
-
-    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
-    private String email;
-
-    @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
-    private String password;
-
+public class UserRequest extends ModelUsersDto {
     private List<@Valid PhoneRequest> phones;
 }

@@ -1,14 +1,13 @@
 package com.nisum.pruebanisum.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
- * Dto response, modelo que se responde cuando se persite un usuario
+ * Dto del response user
  */
 @Getter
 @Setter
@@ -16,11 +15,8 @@ public class UserResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private Date created;
-    private Date modified;
-    @JsonProperty(value = "last_login")
-    private Date lastLogin;
-    private String token;
+    private String name;
+    private String email;
     private Boolean active;
-
+    private List<PhoneResponse> phones;
 }

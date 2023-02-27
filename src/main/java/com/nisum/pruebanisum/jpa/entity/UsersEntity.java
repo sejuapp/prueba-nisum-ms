@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "USERS")
+@Table(name = "APPUSERS")
 public class UsersEntity {
 
     @Id
@@ -25,7 +25,7 @@ public class UsersEntity {
     @Column(name = "USER_NAME", nullable = false)
     private String name;
 
-    @Column(name = "USER_EMAIL", unique = true, nullable = false)
+    @Column(name = "USER_EMAIL", nullable = false)
     private String email;
 
     @Column(name = "USER_PASSWORD", nullable = false)
