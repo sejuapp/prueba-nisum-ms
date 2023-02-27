@@ -24,7 +24,7 @@ public class ErrorController {
 		log.error("BAD_REQUEST: {} : {}" + ex.getLocalizedMessage(), ex);
 		MensajeErrorResponse mensaje = new MensajeErrorResponse();
 		mensaje.setMensaje("Error al validar los campos de entrada");
-		return new ResponseEntity<MensajeErrorResponse>(mensaje, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(mensaje, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler
@@ -34,7 +34,7 @@ public class ErrorController {
 		log.error("INTERNAL_SERVER_ERROR: {} : {}" + ex.getLocalizedMessage(), ex);
 		MensajeErrorResponse mensaje = new MensajeErrorResponse();
 		mensaje.setMensaje("Ha ocurrido un error en el sistema: " + ex.getMessage());
-		return new ResponseEntity<MensajeErrorResponse>(mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler
@@ -45,7 +45,7 @@ public class ErrorController {
 
 		MensajeErrorResponse mensaje = new MensajeErrorResponse();
 		mensaje.setMensaje(ex.getMessage());
-		return new ResponseEntity<MensajeErrorResponse>(mensaje, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(mensaje, HttpStatus.BAD_REQUEST);
 	}
 
 }

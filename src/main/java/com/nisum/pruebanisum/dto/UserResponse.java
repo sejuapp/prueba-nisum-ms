@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Dto response, modelo que se responde cuando se persite un usuario
+ */
 @Getter
 @Setter
 public class UserResponse implements Serializable {

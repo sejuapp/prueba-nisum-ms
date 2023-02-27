@@ -7,6 +7,9 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Dto del request user
+ */
 @Getter
 @Setter
 public class UserRequest {

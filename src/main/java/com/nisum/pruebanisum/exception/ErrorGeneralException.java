@@ -8,8 +8,5 @@ public class ErrorGeneralException extends Exception {
 		super(mensaje);
 	}
 
-	public ErrorGeneralException(Throwable cause) {
-		super(cause);
-	}
 
 }

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Dto del request telefono
+ */
 @Getter
 @Setter
 public class PhoneRequest {

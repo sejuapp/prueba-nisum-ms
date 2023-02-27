@@ -41,7 +41,9 @@ public class UsersService implements IUsersService {
         UsersEntity userSave = mapeerEntity(user);
         processEmailValidation(userSave.getEmail());
 
-        return saveData(userSave);
+        saveData(userSave);
+
+        return ObjectConverter.map(userSave, UserResponse.class);
     }
 
     /**
@@ -71,9 +73,8 @@ public class UsersService implements IUsersService {
      * Método encargado de persistor la información de users y phone y devolver la información mapeada
      *
      * @param data UsersEntity
-     * @return UserResponse
      */
-    public UserResponse saveData(UsersEntity data) {
+    public void saveData(UsersEntity data) {
 
         usersRepository.save(data);
 
@@ -82,11 +83,6 @@ public class UsersService implements IUsersService {
 
             phoneRepository.saveAll(data.getPhones());
         }
-
-        UserResponse userResponse = ObjectConverter.map(data, UserResponse.class);
-
-        return userResponse;
-
     }
 
     /**
