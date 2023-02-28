@@ -25,7 +25,7 @@ App prueba técnica Nisum
 
    <ul>
      <li><a target="_blank" href="https://site--back--8kyzyfq4vw5r.code.run/nisum/swagger-ui/index.html">online-app-swagger-ui</a></li>
-     <li><a target="_blank" href="https://site--back--8kyzyfq4vw5r.code.run/nisum/db/">online-db-h2</a></li>
+     <li><a target="_blank" href="https://site--back--8kyzyfq4vw5r.code.run/nisum/h2-console/">online-db-h2</a></li>
    </ul>
 
 ### Local
@@ -47,7 +47,7 @@ App prueba técnica Nisum
  
    <ul>
      <li><a target="_blank" href="http://localhost:8081/nisum/swagger-ui/index.html#">local-app-swagger-ui</a></li>
-     <li><a target="_blank" href="http://localhost:8081/nisum/db/">local-db-h2</a></li>
+     <li><a target="_blank" href="http://localhost:8081/nisum/h2-console/">local-db-h2</a></li>
    </ul>
 
 

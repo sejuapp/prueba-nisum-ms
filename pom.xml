@@ -20,6 +20,7 @@
             src/main/java/com/nisum/pruebanisum/jpa/**/*,
             src/main/java/com/nisum/pruebanisum/PruebaNisumApplication.java,
             src/main/java/com/nisum/pruebanisum/exception/**,
+            src/main/java/com/nisum/pruebanisum/config/**,
             src/main/java/com/nisum/pruebanisum/utilities/Constantes.java,
             src/main/java/com/nisum/pruebanisum/utilities/ObjectConverter.java,
             src/main/java/com/nisum/pruebanisum/controller/ErrorController.java,
@@ -85,6 +86,17 @@
             <version>0.9.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
     <dependencyManagement>
@@ -123,6 +135,7 @@
                         <exclude>com/nisum/pruebanisum/dto/**/*</exclude>
                         <exclude>com/nisum/pruebanisum/jpa/**/*</exclude>
                         <exclude>com/nisum/pruebanisum/PruebaNisumApplication*</exclude>
+                        <exclude>com/nisum/pruebanisum/config/**</exclude>
                         <exclude>com/nisum/pruebanisum/exception/**</exclude>
                         <exclude>com/nisum/pruebanisum/utilities/Constantes*</exclude>
                         <exclude>com/nisum/pruebanisum/utilities/ObjectConverter*</exclude>
