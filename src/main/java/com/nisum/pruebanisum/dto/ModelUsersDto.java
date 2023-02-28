@@ -13,11 +13,11 @@ import java.io.Serializable;
 public class ModelUsersDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Schema(example = "Juan Rodriguez")
+    @Schema(example = "Ivan Gonzalez")
     @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
     private String name;
 
-    @Schema(example = "juan@rodriguez.org")
+    @Schema(example = "ivan@gonzalez.org")
     @NotEmpty(message = Constantes.MsgError.NOT_EMPTY)
     private String email;
 
