@@ -15,6 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
             "/**"
     };
 
+
     public void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(AUTH_WHITELIST)
@@ -24,12 +25,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .formLogin();
 
         http.csrf().ignoringAntMatchers("/h2-console/**");
-        http.csrf().ignoringAntMatchers("/swagger-ui/**");
         http.headers().frameOptions().sameOrigin();
     }
 
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**").allowedOriginPatterns("*").allowedHeaders("*").allowCredentials(true)
-                .allowedMethods("GET", "PUT", "POST", "DELETE");
+                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
+
 }
